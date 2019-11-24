@@ -1,23 +1,23 @@
-/*
-Script de restrições do banco de dados BDSpotPer
-*/
+USE BDspotPer;
 
-USE BDSpotPer;
+------- RestriÃ§Ãµes Parte I
 
---Restrição referente a: Part I (i) c
-ALTER TABLE album
-ADD CONSTRAINT data_compra_limit CHECK(dt_compra > '01-01-2000');
+-- item (i) c
+ALTER TABLE album ADD CONSTRAINT album_CK_limite_dt_compra CHECK(dt_compra > '01-01-2000');
 
---Restrição referente a: Part I (i) e)
-CREATE TRIGGER preco_album_limit_TR ON album
+-- item (i) d
+ALTER TABLE album ADD CONSTRAINT album_CK_tipo_compra CHECK (tipo_compra like 'fÃ­sica' or tipo_compra like 'download');
+
+-- item (i) e
+CREATE TRIGGER TR_pr_album_limite ON album
 INSTEAD OF INSERT AS
 IF (SELECT pr_compra FROM inserted) > 3 * 
-(SELECT AVG(pr_compra) FROM album
-	WHERE NOT EXISTS (SELECT faixa.cod_album FROM faixa WHERE tipo_gravacao = 'ADD' AND album.cod_album = faixa.cod_album))
+(SELECT AVG(pr_compra) FROM album a
+	WHERE NOT EXISTS (SELECT f.cod_album FROM faixa f WHERE a.cod_album = f.cod_album AND f.tipo_gravacao = 'ADD'))
  BEGIN
-	RAISERROR('O preço de compra de um álbum não dever ser superior a três vezes a
-média do preço de compra de álbuns, com todas as faixas com tipo de
-gravação DDD.', 10, 1)
+	RAISERROR('O preco de compra de um album nao deve ser superior a tres vezes a
+media do preco de compra de albuns, com todas as faixas com tipo de
+gravacao DDD.', 10, 1)
 	ROLLBACK TRANSACTION
  END
 ELSE
@@ -25,12 +25,13 @@ ELSE
 	INSERT INTO album SELECT * FROM inserted
  END
 
---Restrição referente a: Part I (ii) b)
-ALTER TABLE faixa
-ADD CONSTRAINT restri_tipos_gravacao CHECK( tipo_gravacao= 'DDD' OR tipo_gravacao = 'ADD');
+-- item (ii) b
+ALTER TABLE faixa ADD CONSTRAINT faixa_CK_tipo_gravacao CHECK(tipo_gravacao = 'DDD' OR tipo_gravacao = 'ADD');
 
---Restrição referente a: Part II 3) a)
 
+------- RestriÃ§Ãµes Parte II
+
+-- item (3) a
 CREATE TRIGGER TR_album_faixa_periodo_tipograva ON faixa_compositor
 INSTEAD OF INSERT AS
 IF (SELECT periodoMsc.descricao FROM inserted INNER JOIN compositor
@@ -39,7 +40,7 @@ IF (SELECT periodoMsc.descricao FROM inserted INNER JOIN compositor
 	(SELECT tipo_gravacao FROM inserted INNER JOIN faixa
 	ON faixa.cod_album = inserted.cod_album AND faixa.num_faixa = inserted.num_faixa) != 'DDD'
  BEGIN
- 	 RAISERROR('Um álbum, com faixas de músicas do período barroco, só pode ser adquirido, caso o tipo de gravação seja DDD.', 10, 1)
+ 	 RAISERROR('Um album, com faixas de musicas do periodo barroco, so pode ser adquirido, caso o tipo de gravacao seja DDD.', 10, 1)
  	 ROLLBACK TRANSACTION
  END
 ELSE
@@ -47,14 +48,12 @@ ELSE
 	INSERT INTO faixa_compositor SELECT * FROM inserted
  END
 
-
-
---Restrição referente a: Part II 3) b)
-CREATE TRIGGER limit_faixas_album_TR ON faixa
+-- item (3) b
+CREATE TRIGGER TR_limite_faixas_album ON faixa
 INSTEAD OF INSERT AS
-IF (SELECT COUNT(faixa.cod_album) FROM inserted INNER JOIN faixa ON faixa.cod_album = inserted.cod_album) >= 64
+IF (SELECT COUNT(f.cod_album) FROM inserted INNER JOIN faixa f ON f.cod_album = inserted.cod_album) >= 64
  BEGIN
-	RAISERROR('Um álbum não pode ter mais que 64 faixas', 10, 1)
+	RAISERROR('Um album nao pode ter mais que 64 faixas', 10, 1)
 	ROLLBACK TRANSACTION
  END
 ELSE
@@ -62,34 +61,5 @@ ELSE
 	INSERT INTO faixa SELECT * FROM inserted
  END
 
---Restrições referentes a: Part II 3) c)
-ALTER TABLE faixa
-DROP CONSTRAINT faixa_FK_cod_album;
-
-ALTER TABLE faixa
-ADD CONSTRAINT faixa_FK_cod_album FOREIGN KEY (cod_album) REFERENCES album
-ON DELETE CASCADE
-ON UPDATE CASCADE;
-
-ALTER TABLE playlist_faixa
-DROP CONSTRAINT playlist_faixa_FK_cod_faixa;
-
-ALTER TABLE playlist_faixa
-ADD CONSTRAINT playlist_faixa_FK_cod_faixa FOREIGN KEY (cod_album, num_faixa) REFERENCES faixa
-ON DELETE CASCADE
-ON UPDATE CASCADE;
-
-ALTER TABLE faixa_interprete
-DROP CONSTRAINT faixa_interprete_FK_cod_interprete;
-
-ALTER TABLE faixa_interprete
-ADD 	CONSTRAINT faixa_interprete_FK_cod_interprete FOREIGN KEY (cod_interprete)
-		REFERENCES interprete (cod_interprete) ON UPDATE CASCADE ON DELETE CASCADE;
-
-ALTER TABLE faixa_compositor
-DROP CONSTRAINT faixa_compositor_FK_cod_compositor;
-
-ALTER TABLE faixa_compositor
-ADD CONSTRAINT faixa_compositor_FK_cod_compositor FOREIGN KEY (cod_compositor)
-		REFERENCES compositor (cod_compositor) ON UPDATE CASCADE ON DELETE CASCADE;
-
+-- item (3) c
+-- ja estÃ£o implementados em "scriptCriacaoBD"
