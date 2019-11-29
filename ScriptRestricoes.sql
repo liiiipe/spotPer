@@ -63,3 +63,46 @@ ELSE
 
 -- item (3) c
 -- ja estão implementados em "scriptCriacaoBD"
+
+
+----- IMPLEMENTAÇÕES ADICIONAIS
+
+-- TempoTotalPlaylist
+
+create view TempoTotalPlaylist as 
+select pf.cod_playlist,(SUM(DATEDIFF(SECOND,'00:00:00',f.tempo_execucao))) as TempoTotal  from playlist_faixa pf  
+inner join faixa f on  f.num_faixa = pf.num_faixa
+inner join playlist p on p.cod_playlist = pf.cod_playlist
+group by pf.cod_playlist
+
+select * from TempoTotalPlaylist
+
+CREATE TRIGGER add_tempo_playlist ON playlist_faixa
+AFTER INSERT AS
+ BEGIN
+	UPDATE playlist set tempo_execucao = convert(char(8), dateadd(second, ( 
+	select ttp.TempoTotal from TempoTotalPlaylist ttp 
+	where
+	(select inserted.cod_playlist from inserted )=ttp.cod_playlist 
+	), ''), 114)
+	where cod_playlist = (select inserted.cod_playlist from inserted )
+	
+ END
+
+-- cod_album_nome
+
+CREATE FUNCTION cod_album_nome (@nome VARCHAR(50))
+RETURNS TABLE
+AS
+RETURN(
+		select a.cod_album from album a where a.descricao like CONCAT('%', @nome, '%')
+	)
+
+-- retorna cod_playlist tendo como parametro o nome
+
+CREATE FUNCTION cod_playlist_nome (@nome VARCHAR(50))
+RETURNS TABLE
+AS
+RETURN(
+		select p.cod_playlist from playlist p where p.nome like CONCAT('%', @nome, '%')
+	)
