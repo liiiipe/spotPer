@@ -50,10 +50,11 @@ void JanelaNovaPlaylist::on_btnCriarPlaylist_clicked()
     QSqlQuery queryNovaPlaylist;
     queryNovaPlaylist.prepare("insert into playlist (nome, dt_criacao, tempo_execucao) values('"+nome_playlist+"', '25-11-2019', '00:00:00')");
     if(queryNovaPlaylist.exec()){
-        QMessageBox::about(this, "SUCESSO", "Playlist criada!\nEscolha o album desejado e adicione faixas à "+nome_playlist+ "!");
+        QMessageBox::about(this, "Playlist criada!", "Escolha o album desejado e adicione faixas à "+nome_playlist+ "!");
     }else{
         QMessageBox::warning(this, "ERRO", "Erro ao tentar criar a playlist!");
     }
+    ui->lineEditNomePlaylist->setStyleSheet("QLineEdit {background-color: #33c88a}");
 }
 
 void JanelaNovaPlaylist::on_btnPesquisarFaixas_clicked()
@@ -102,5 +103,26 @@ void JanelaNovaPlaylist::on_btnAddAPlaylist_clicked()
     int linha2 = ui->tableWidgetFaixas->currentRow();
     QString num_faixa_selecionado = ui->tableWidgetAlbuns->item(linha2, 0)->text();
 
+    QString nome_playlist = ui->lineEditNomePlaylist->text();
+    QString cod_playlist;
 
+    // query para obter o cod_playlist
+    QSqlQuery queryCod_Playlist;
+    queryCod_Playlist.prepare("select * from cod_playlist_nome('"+nome_playlist+"')");
+    if(queryCod_Playlist.exec()){
+        while(queryCod_Playlist.next()){
+            cod_playlist = queryCod_Playlist.value(0).toString();
+        }
+    }else{
+        QMessageBox::warning(this, "ERRO", "Erro ao tentar obter o codigo da playlist!");
+    }
+
+    //adicionando faixa a playlist, na tabela playlist_faixa
+    QSqlQuery queryAddFaixa_Playlist;
+    queryAddFaixa_Playlist.prepare("insert into playlist_faixa (cod_playlist, num_faixa, cod_album) values ("+cod_playlist+","+num_faixa_selecionado+","+cod_album_selecionado+")");
+    if(queryAddFaixa_Playlist.exec()){
+        QMessageBox::about(this, "Faixa Adicionada", "Faixa adicionada à playlist "+nome_playlist+"!");
+    }else{
+        QMessageBox::warning(this, "ERRO", "Erro ao tentar adicionar a faixa à playlist!");
+    }
 }
