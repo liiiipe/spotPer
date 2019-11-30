@@ -1,5 +1,8 @@
 #include "janelaverplaylist.h"
 #include "ui_janelaverplaylist.h"
+
+#include "janelaaddnovafaixa.h"
+
 #include <QtSql>
 #include <QtDebug>
 #include <QMessageBox>
@@ -103,4 +106,15 @@ void JanelaVerPlaylist::on_btnDeletarFaixa_clicked()
         QMessageBox::warning(this, "ERRO", "Erro ao tentar deletar faixa existente da playlist!");
     }
 
+}
+
+void JanelaVerPlaylist::on_btnAddNovaFaixa_clicked()
+{
+    int linha1 = ui->tableWidgetPlaylists->currentRow();
+    QString cod_playlist_selecionado = ui->tableWidgetPlaylists->item(linha1, 0)->text();
+
+    janelaaddnovafaixa addnovafaixa(this, cod_playlist_selecionado);
+    addnovafaixa.exec();
+
+    on_btnPesquisarFaixas_clicked();
 }

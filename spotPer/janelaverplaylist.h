@@ -20,6 +20,8 @@ private slots:
 
     void on_btnDeletarFaixa_clicked();
 
+    void on_btnAddNovaFaixa_clicked();
+
 private:
     Ui::JanelaVerPlaylist *ui;
 };

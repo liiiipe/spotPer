@@ -16,17 +16,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    janelaaddnovafaixa.cpp \
     janelanovaplaylist.cpp \
     janelaverplaylist.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    janelaaddnovafaixa.h \
     janelanovaplaylist.h \
     janelaverplaylist.h \
     mainwindow.h
 
 FORMS += \
+    janelaaddnovafaixa.ui \
     janelanovaplaylist.ui \
     janelaverplaylist.ui \
     mainwindow.ui

@@ -101,7 +101,7 @@ void JanelaNovaPlaylist::on_btnAddAPlaylist_clicked()
     QString cod_album_selecionado = ui->tableWidgetAlbuns->item(linha1, 0)->text();
 
     int linha2 = ui->tableWidgetFaixas->currentRow();
-    QString num_faixa_selecionado = ui->tableWidgetAlbuns->item(linha2, 0)->text();
+    QString num_faixa_selecionado = ui->tableWidgetFaixas->item(linha2, 0)->text();
 
     QString nome_playlist = ui->lineEditNomePlaylist->text();
     QString cod_playlist;
