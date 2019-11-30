@@ -13,6 +13,30 @@
   <property name="windowTitle">
    <string>Adicionar Nova Faixa</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="iconspotper.qrc">
+    <normaloff>:/new/prefix1/imgs/spot.png</normaloff>:/new/prefix1/imgs/spot.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QPushButton {
+	font: 75 16pt &quot;Bahnschrift&quot;;
+	background-color:#44c767;
+	border-radius: 10px;
+	border:1px solid #18ab29;
+	color:#ffffff;
+	font-size:17px;
+}
+QPushButton:hover {
+	background-color: #53f37e;
+}
+QDialog{
+	background-color: #303030;
+}
+QLabel{
+	font: 75 16pt &quot;Bahnschrift&quot;;
+	color:#ffffff;
+}</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -74,6 +98,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="iconspotper.qrc"/>
+ </resources>
  <connections/>
 </ui>

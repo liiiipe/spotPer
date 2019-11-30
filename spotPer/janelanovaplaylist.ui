@@ -13,6 +13,30 @@
   <property name="windowTitle">
    <string>Nova Playlist</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="iconspotper.qrc">
+    <normaloff>:/new/prefix1/imgs/spot.png</normaloff>:/new/prefix1/imgs/spot.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QPushButton {
+	font: 75 16pt &quot;Bahnschrift&quot;;
+	background-color:#44c767;
+	border-radius: 10px;
+	border:1px solid #18ab29;
+	color:#ffffff;
+	font-size:17px;
+}
+QPushButton:hover {
+	background-color: #53f37e;
+}
+QDialog{
+	background-color: #303030;
+}
+QLabel{
+	font: 75 16pt &quot;Bahnschrift&quot;;
+	color:#ffffff;
+}</string>
+  </property>
   <property name="modal">
    <bool>true</bool>
   </property>
@@ -32,7 +56,7 @@
      <item row="0" column="2">
       <widget class="QPushButton" name="btnCriarPlaylist">
        <property name="text">
-        <string>Criar Playlist</string>
+        <string>CRIAR PLAYLIST</string>
        </property>
       </widget>
      </item>
@@ -53,7 +77,7 @@
      <item>
       <widget class="QPushButton" name="btnAddAPlaylist">
        <property name="text">
-        <string>Adicionar a Playlist</string>
+        <string>ADICIONAR A PLAYLIST</string>
        </property>
       </widget>
      </item>
@@ -74,7 +98,7 @@
      <item>
       <widget class="QPushButton" name="btnPesquisarFaixas">
        <property name="text">
-        <string>Pesquisar Faixas</string>
+        <string>PESQUISAR FAIXAS</string>
        </property>
        <property name="checkable">
         <bool>false</bool>
@@ -85,6 +109,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="iconspotper.qrc"/>
+ </resources>
  <connections/>
 </ui>

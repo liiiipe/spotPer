@@ -11,7 +11,27 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>spotPer</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="iconspotper.qrc">
+    <normaloff>:/new/prefix1/imgs/spot.png</normaloff>:/new/prefix1/imgs/spot.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QPushButton {
+	font: 75 16pt &quot;Bahnschrift&quot;;
+	background-color:#44c767 ;
+	border-radius: 15px;
+	border:1px solid #18ab29;
+	color:#ffffff;
+	font-size:17px;
+}
+QPushButton:hover {
+	background-color: #53f37e;
+}
+QMainWindow{
+	background-color: #303030;
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
@@ -24,10 +44,11 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">font: 75 26pt &quot;Bahnschrift&quot;;
+color: #44c767;</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:26pt; font-weight:600; color:#33c88a;&quot;&gt;spotPer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color:#44c767;&quot;&gt;spotPer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btnNovaPlaylist">
@@ -40,7 +61,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Nova Playlist</string>
+     <string>NOVA PLAYLIST</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btnVerPlaylist">
@@ -53,7 +74,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Ver Playlists</string>
+     <string>VER PLAYLISTS</string>
     </property>
    </widget>
   </widget>
@@ -69,6 +90,8 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="iconspotper.qrc"/>
+ </resources>
  <connections/>
 </ui>

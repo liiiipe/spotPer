@@ -111,7 +111,7 @@ void janelaaddnovafaixa::on_btnAddAPlaylist_clicked()
     QSqlQuery queryAddFaixa_Playlist;
     queryAddFaixa_Playlist.prepare("insert into playlist_faixa (cod_playlist, num_faixa, cod_album) values ("+cod_playlist_selecionado+","+num_faixa_selecionado+","+cod_album_selecionado+")");
     if(queryAddFaixa_Playlist.exec()){
-        QMessageBox::about(this, "Faixa Adicionada", "Faixa adicionada à playlist "+nome_playlist_selecionado+"!");
+        QMessageBox::information(this, "Faixa Adicionada", "Faixa adicionada à playlist "+nome_playlist_selecionado+"!");
     }else{
         QMessageBox::warning(this, "ERRO", "Erro ao tentar adicionar a faixa à playlist!");
     }
