@@ -15,6 +15,11 @@ public:
     explicit JanelaVerPlaylist(QWidget *parent = nullptr);
     ~JanelaVerPlaylist();
 
+private slots:
+    void on_btnPesquisarFaixas_clicked();
+
+    void on_btnDeletarFaixa_clicked();
+
 private:
     Ui::JanelaVerPlaylist *ui;
 };

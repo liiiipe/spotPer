@@ -23,7 +23,7 @@ JanelaNovaPlaylist::JanelaNovaPlaylist(QWidget *parent) :
         }
         //setando largura das colunas
         ui->tableWidgetAlbuns->setColumnWidth(0, 65);
-        ui->tableWidgetAlbuns->setColumnWidth(1, 225);
+        ui->tableWidgetAlbuns->setColumnWidth(1, 243);
 
         //setando nome das colunas, nao edicao de conteudo, selecionando linha inteira, desabilitando numero das linhas, e mudando cor da linha
         QStringList cabecalhos = {"Código", "Album"};
@@ -79,7 +79,7 @@ void JanelaNovaPlaylist::on_btnPesquisarFaixas_clicked()
 
         //setando largura das colunas
         ui->tableWidgetFaixas->setColumnWidth(0, 65);
-        ui->tableWidgetFaixas->setColumnWidth(1, 225);
+        ui->tableWidgetFaixas->setColumnWidth(1, 243);
 
         //setando nome das colunas, nao edicao de conteudo, selecionando linha inteira, desabilitando numero das linhas, e mudando cor da linha
         QStringList cabecalhos = {"Número", "Faixa"};

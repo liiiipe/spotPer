@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>618</width>
-    <height>447</height>
+    <width>648</width>
+    <height>467</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,6 +38,27 @@
      </item>
     </layout>
    </item>
+   <item row="1" column="1">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-weight:600;&quot;&gt;Faixas&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTableWidget" name="tableWidgetFaixas"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnAddAPlaylist">
+       <property name="text">
+        <string>Adicionar a Playlist</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
    <item row="1" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
@@ -57,27 +78,6 @@
        </property>
        <property name="checkable">
         <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="1" column="1">
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-weight:600;&quot;&gt;Faixas&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QTableWidget" name="tableWidgetFaixas"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnAddAPlaylist">
-       <property name="text">
-        <string>Adicionar a Playlist</string>
        </property>
       </widget>
      </item>
